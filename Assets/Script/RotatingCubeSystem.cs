@@ -26,7 +26,7 @@ public partial struct RotatingCubeSystem : ISystem
     {
         state.Enabled = false; //Disable the system
         return;
-        foreach ((RefRW<LocalTransform>localTransform, RefRO<RotateSpeed> rotateSpeed) 
+        /*foreach ((RefRW<LocalTransform>localTransform, RefRO<RotateSpeed> rotateSpeed) 
             in SystemAPI.Query<RefRW<LocalTransform>, RefRO<RotateSpeed>>().WithAll<RotatingCube>())
         {
             //Value RW -> value we want to change (ReadWrite)
@@ -41,7 +41,7 @@ public partial struct RotatingCubeSystem : ISystem
         //Schedule = run on one thread in the future depending on which one is busy, complete the entire job in 1 thread
         //Schedule parallel = Split job in multple chunks and create multiple job that run on multiple thread
         //rotatingCubeJob.Schedule();
-        rotatingCubeJob.ScheduleParallel(); //Work better with a great amount of entity
+        rotatingCubeJob.ScheduleParallel(); //Work better with a great amount of entity*/
 
     }
 
