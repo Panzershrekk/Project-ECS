@@ -24,6 +24,8 @@ public partial struct RotatingCubeSystem : ISystem
     [BurstCompile] //Compile with burst
     public void OnUpdate(ref SystemState state)
     {
+        state.Enabled = false; //Disable the system
+        return;
         foreach ((RefRW<LocalTransform>localTransform, RefRO<RotateSpeed> rotateSpeed) 
             in SystemAPI.Query<RefRW<LocalTransform>, RefRO<RotateSpeed>>().WithAll<RotatingCube>())
         {
