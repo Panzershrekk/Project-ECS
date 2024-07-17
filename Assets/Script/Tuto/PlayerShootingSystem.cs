@@ -38,6 +38,7 @@ public partial class PlayerShootingSystem : SystemBase
         //Unity.Collections.Allocator.Temp //Temp will be disposed when it's not needed anymore
         EntityCommandBuffer entityCommandBuffer = new EntityCommandBuffer(WorldUpdateAllocator); //Will be disposed at the end of the frame
         //It will store command in the foreach
+        //With entity Access = if you want to get the entity (tuple)
         foreach ((RefRO<LocalTransform> localtransform, Entity entity) in SystemAPI.Query<RefRO<LocalTransform>>().WithAll<Player>().WithDisabled<Stunned>().WithEntityAccess())
         {
             Entity spawnedEntity = entityCommandBuffer.Instantiate(spawnCubeConfig.cubePrefabEntity);
