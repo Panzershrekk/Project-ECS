@@ -15,6 +15,7 @@ public partial struct HandleCubeSystem : ISystem
     [BurstCompile] //Compile with burst
     public void OnUpdate(ref SystemState state)
     {
+        //No need value RW/RO for aspect
         foreach (RotatingMovingCubeAspect rotatingMovingCubeAspect in SystemAPI.Query<RotatingMovingCubeAspect>())
         {
             rotatingMovingCubeAspect.MoveAndRotate(SystemAPI.Time.DeltaTime);
