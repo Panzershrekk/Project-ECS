@@ -14,14 +14,12 @@ public partial class MovingProjectileSystem : SystemBase
 {
     private ComponentLookup<Projectile> projectile;
     private ComponentLookup<Target> target;
-    EndSimulationEntityCommandBufferSystem m_EndSimulationEcbSystem;
 
     protected override void OnCreate()
     {
         projectile = GetComponentLookup<Projectile>(false);
         target = GetComponentLookup<Target>(false);
-/*m_EndSimulationEcbSystem = World
-            .GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();*/
+
     }
 
     protected override void OnUpdate()
@@ -29,7 +27,7 @@ public partial class MovingProjectileSystem : SystemBase
         projectile.Update(this);
         target.Update(this);
 
-        //var entityCommandBuffer = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(Unmanaged);
+        var ecb = SystemAPI.GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>();
 
         foreach (MovingProjectileAspect movingProjectileAspect in SystemAPI.Query<MovingProjectileAspect>())
         {
@@ -40,7 +38,7 @@ public partial class MovingProjectileSystem : SystemBase
 
         var jobHandle = new ProjectileHitJob
         {
-            //ecb = entityCommandBuffer,
+            //ecb = ecb.CreateCommandBuffer(unman),
             projectile = this.projectile,
             target = this.target,
         }.Schedule(simulation, Dependency);
@@ -80,7 +78,7 @@ public partial class MovingProjectileSystem : SystemBase
             if (p == Entity.Null || t == Entity.Null) return;
 
             Debug.Log("SKia");
-            ecb.DestroyEntity(0, p);
+            //ecb.DestroyEntity(0, p);
         }
     }
 }
