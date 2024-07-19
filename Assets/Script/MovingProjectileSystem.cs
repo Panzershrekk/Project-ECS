@@ -76,6 +76,8 @@ public partial class MovingProjectileSystem : SystemBase
             }
 
             if (p == Entity.Null || t == Entity.Null) return;
+            Entity scoreEventEntity = ecb.CreateEntity();
+            ecb.AddComponent(scoreEventEntity, new ScoreEvent { Target = t });
             //Since Trigent event is stateless (no onTriggerEnter, Stay, Exit ....) we probably should wheck for all object that were hit to avoir multiple call, 
             //but projectile is destroyed instantaly so it only goes there once
             ecb.DestroyEntity(p);
