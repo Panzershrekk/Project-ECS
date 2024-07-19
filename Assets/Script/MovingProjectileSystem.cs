@@ -38,7 +38,7 @@ public partial class MovingProjectileSystem : SystemBase
 
         var jobHandle = new ProjectileHitJob
         {
-            //ecb = ecb.CreateCommandBuffer(unman),
+            ecb = ecb.CreateCommandBuffer(World.Unmanaged),
             projectile = this.projectile,
             target = this.target,
         }.Schedule(simulation, Dependency);
@@ -76,9 +76,9 @@ public partial class MovingProjectileSystem : SystemBase
             }
 
             if (p == Entity.Null || t == Entity.Null) return;
-
-            Debug.Log("SKia");
-            //ecb.DestroyEntity(0, p);
+            //Since Trigent event is stateless (no onTriggerEnter, Stay, Exit ....) we probably should wheck for all object that were hit to avoir multiple call, 
+            //but projectile is destroyed instantaly so it only goes there once
+            ecb.DestroyEntity(p);
         }
     }
 }
